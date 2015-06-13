@@ -1,14 +1,9 @@
-import GetFormData
-import DownloadTorrent
+import IndexPage
 import MainPage
 
-url="http://cl.bearhk.info/htm_data/15/1506/1514015.html"
+url="http://cl.bearhk.info/thread0806.php?fid=15&search=&page=1"
+#get url list from index page
+mp_urllist=IndexPage.getIndexPageUrls(url)
 
-download_url=MainPage.getUrl(url)
-
-formdata=GetFormData.FormData()
-form,action=formdata.getformdata(download_url)
-
-torrent_url="http://www.rmdown.com/"+action
-download=DownloadTorrent.Download_Torrent()
-download.download_torrent(torrent_url, form)
+for url in mp_urllist:
+    MainPage.exec_download("http://cl.bearhk.info/"+url)
